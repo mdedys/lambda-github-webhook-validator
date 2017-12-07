@@ -43,5 +43,5 @@ module.exports.handler = function(event, context, callback) => {
 
 [npm-url]: https://npmjs.org/package/lambda-github-webhook-validator
 [npm-image]: https://img.shields.io/npm/v/lambda-github-webhook-validator.png
-[ci-url]: https://travis-ci.org/mdedys/lambda-github-webhook-validator.svg?branch=master
+[ci-url]: https://travis-ci.org/mdedys/lambda-github-webhook-validator
 [ci-image]: https://img.shields.io/travis-ci/mdedys/lambda-github-webhook-validator.svg
