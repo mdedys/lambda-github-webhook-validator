@@ -1,0 +1,16 @@
+{
+  "name": "lambda-github-webhook-validator",
+  "version": "0.0.1",
+  "description": "Helper function validate github webhook signature",
+  "main": "index.js",
+  "author": "Mike Dedys",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "nyc mocha test.js"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0"
+  }
+}

@@ -1,0 +1,5 @@
+.nyc_output
+node_modules
+.gitignore
+yarn.lock
+test.js
