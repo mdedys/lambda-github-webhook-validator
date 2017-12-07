@@ -1,0 +1,12 @@
+language: node_js
+node_js: stable
+after_success:
+    yarn run coverage
+deploy:
+  provider: npm
+  email: mikededys@gmail.com
+  api_key:
+    secure: CcFpySoYVf4cynzIMNsjr+zXKI04CqrtOO/P/JyU+FAQ/PXEo2cgJQkXjQWJHmaJfhGEUjpM9ugJD93IFxPg++eHJ6HqRw5jSlILLnMkTYtucZfzAfy3DtJzWveRAlDRtjEZbD8Q5R/QtS30mDsJnPflB8dW8e3QyjeU35W0rJFX2JSGlHi+Hck3RzTih6OsGOXj6gZ4hyOnf21PGY67vX8JmJJe1XNWfA0jT/hyGOvt1VUqLt6KjUy7p0ZV02qYmXOtCN7jEmwRhSQ8qYjYdhmIIYLUzKaoI6M0Nj2RZ3hvSImXxnLKOSejtnQEZI+QRcDX/jR5EDdGxTI0CQ3VtgGQI04x+OBKfuJhTT4LXeOHUT+ijuKVcQy0y2nbCkCJROB3DBZKNkfuaR+ENlD0h8ZkPTZhaxpvGwJBuoEbeU7UaHKO2pQzPkYE5I2algWQKhu1AWaXHGJoS7AqOOoJMlFTqur4qKvx9DzMLnZsLdaBYJ6geMIsL2uH8ZKpZZvbd1kpH2ri282Fnf9gdX7hu4O+56TzcYlyxSnhn92Nb3d7z1PriWEPXGVwHTWcXia8fm5kJ5eKFzi2ReId+TiAkflKi9YINsYISKeajuMseLtxbJQq7Aur3lsbAdd95hlpD7GcBimd3J3UosYdQKccH2uzYRqe0OjeJA/bg2rDZZU=
+  on:
+    tags: true
+    branch: master

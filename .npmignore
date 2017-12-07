@@ -3,3 +3,5 @@ node_modules
 .gitignore
 yarn.lock
 test.js
+.travis.yml
+.coveralls.yml

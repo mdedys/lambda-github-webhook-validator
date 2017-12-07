@@ -7,10 +7,16 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "nyc mocha test.js"
+    "test": "nyc --reporter=html --reporter=text mocha test.js",
+    "coverage": "nyc report --reporter=text-lvoc | coveralls"
   },
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdedys/lambda-github-webhook-validator.git"
   }
 }
