@@ -8,7 +8,7 @@
   "private": false,
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha test.js",
-    "coverage": "nyc report --reporter=text-lvoc | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
