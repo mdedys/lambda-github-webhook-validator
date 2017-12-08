@@ -35,6 +35,7 @@ function createEvent(hasEvent, hasDelivery, hasSignature, falseBody) {
 let callback;
 let validator;
 let lambdaEvent;
+let result;
 
 describe('GithubWebhookValidator', () => {
 
@@ -47,7 +48,8 @@ describe('GithubWebhookValidator', () => {
         validator = new GithubWebhookValidator({});
         lambdaEvent = createEvent(true, true, true, false);
 
-        validator.validate(lambdaEvent, callback);
+        result = validator.isSignatureValid(lambdaEvent, callback);
+        assert.equal(result, false);
     });
 
     it ('No signature header, fail with 401', () => {
@@ -59,7 +61,8 @@ describe('GithubWebhookValidator', () => {
         validator = new GithubWebhookValidator({ secret: secret });
         lambdaEvent = createEvent(true, true, false, false);
 
-        validator.validate(lambdaEvent, callback);
+        result = validator.isSignatureValid(lambdaEvent, callback);
+        assert.equal(result, false);
     });
 
     it ('No event header, fail with 422', () => {
@@ -71,7 +74,8 @@ describe('GithubWebhookValidator', () => {
         validator = new GithubWebhookValidator({ secret: secret });
         lambdaEvent = createEvent(false, true, true, false);
 
-        validator.validate(lambdaEvent, callback);
+        result = validator.isSignatureValid(lambdaEvent, callback);
+        assert.equal(result, false);
     });
 
     it ('No delivery header, fail with 422', () => {
@@ -83,7 +87,8 @@ describe('GithubWebhookValidator', () => {
         validator = new GithubWebhookValidator({ secret: secret });
         lambdaEvent = createEvent(true, false, true, false);
 
-        validator.validate(lambdaEvent, callback);
+        result = validator.isSignatureValid(lambdaEvent, callback);
+        assert.equal(result, false);
     });
 
     it ('Signature does not match, fail with 401', () => {
@@ -95,7 +100,19 @@ describe('GithubWebhookValidator', () => {
         validator = new GithubWebhookValidator({ secret: secret });
         lambdaEvent = createEvent(true, true, true, true);
 
-        validator.validate(lambdaEvent, callback);
+        result = validator.isSignatureValid(lambdaEvent, callback);
+        assert.equal(result, false);
+    });
+
+    it ('Signature matches, fail with 401', () => {
+
+        callback = (err, response) => {};
+
+        validator = new GithubWebhookValidator({ secret: secret });
+        lambdaEvent = createEvent(true, true, true, false);
+
+        result = validator.isSignatureValid(lambdaEvent, callback);
+        assert.equal(result, true);
     });
 
 });

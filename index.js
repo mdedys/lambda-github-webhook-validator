@@ -10,7 +10,7 @@ class GithubWebhookValidator {
         this.secret = options.secret;
     }
 
-    validate(event, callback) {
+    isSignatureValid(event, callback) {
 
         const headers = event.headers;
         const sig = headers['X-Hub-Signature'];
@@ -18,38 +18,48 @@ class GithubWebhookValidator {
         const id = headers['X-GitHub-Delivery'];
 
         if (!this.secret) {
-            return callback(null, {
+            callback(null, {
                 statusCode: 500,
                 headers: { 'Content-Type': 'text/plain' },
                 body: 'No github secret provided'
             });
+
+            return false;
         }
 
         const calculatedSig = signRequestBody(this.secret, event.body);
 
         if (!sig) {
-            return callback(null, {
+            callback(null, {
                 statusCode: 401,
                 headers: { 'Content-Type': 'text/plain' },
                 body: 'No github signature found on request'
             });
+
+            return false;
         }
 
         if (!githubEvent || !id) {
-            return callback(null, {
+            callback(null, {
                 statusCode: 422,
                 headers: { 'Content-Type': 'text/plain' },
                 body: 'Not a valid github event'
             });
+
+            return false;
         }
 
         if (sig !== calculatedSig) {
-            return callback(null, {
+            callback(null, {
                 statusCode: 401,
                 headers: { 'Content-Type': 'text/plain' },
                 body: 'Github signature does not match'
             });
+
+            return false;
         }
+
+        return true;
     }
 }
 

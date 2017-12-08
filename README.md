@@ -22,7 +22,9 @@ yarn test
 
 ## How to use
 
-The validator will return a response if it fails to verify at any point the github request.
+The validator will call the lambda callback a response and return false if it fails to verify
+at any point the github request.
+
 The responses are listed below:
 
 * 401 - *No github signature found on request*
@@ -36,7 +38,9 @@ const GithubWebhookValidator = require('lambda-github-webhook-validator');
 const validator = GithubWebhookValidator({ secret: aSecret });
 
 module.exports.handler = function(event, context, callback) => {
-  validator.validate(event, callback);
+  if (validator.isSignatureValid(event, callback) {
+      // Do work
+  }
 }
 
 ```
